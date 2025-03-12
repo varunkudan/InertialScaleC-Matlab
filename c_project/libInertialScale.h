@@ -1,6 +1,6 @@
 /*
  * MATLAB Compiler: 24.2 (R2024b)
- * Date: Wed Mar 12 18:02:30 2025
+ * Date: Wed Mar 12 18:19:12 2025
  * Arguments:
  * "-B""macro_default""-W""lib:libInertialScale""-T""link:lib""-d""./c_project""
  * -a""./code""ScaleEstimationMain.m"
@@ -51,7 +51,7 @@ bool MW_CALL_CONV mlxScaleEstimationMain(int nlhs, mxArray *plhs[], int nrhs, mx
 
 /* C INTERFACE -- MLF WRAPPERS FOR USER-DEFINED MATLAB FUNCTIONS -- START */
 
-extern LIB_libInertialScale_C_API bool MW_CALL_CONV mlfScaleEstimationMain(int nargout, mxArray** scale);
+extern LIB_libInertialScale_C_API bool MW_CALL_CONV mlfScaleEstimationMain(int nargout, mxArray** scale, mxArray* dataset);
 
 #ifdef __cplusplus
 }
