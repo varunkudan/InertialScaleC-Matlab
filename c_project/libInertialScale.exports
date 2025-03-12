@@ -1,0 +1,7 @@
+libInertialScaleInitialize
+libInertialScaleInitializeWithHandlers
+libInertialScaleTerminate
+libInertialScalePrintStackTrace
+mlxScaleEstimationMain
+mlfScaleEstimationMain
+

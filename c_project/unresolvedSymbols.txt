@@ -1,0 +1,4 @@
+Path	Symbol	Reason
+libInertialS/code/quaternions/qt_dircos.m	sym	undeployable
+libInertialS/code/quaternions/qt_dot.m	sym	undeployable
+libInertialS/code/quaternions/qt_dot_Q.m	sym	undeployable
