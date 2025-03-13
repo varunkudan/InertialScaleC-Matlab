@@ -18,13 +18,13 @@ set(LIBRARY_PATH "${CMAKE_SOURCE_DIR}/c_project")
 link_directories(${LIBRARY_PATH})
 
 # Add executable
-add_executable(my_program main.cpp)
+add_executable(estimate_scale main.cpp)
 
 # Link the generated shared library and MATLAB Runtime libraries
-target_link_libraries(my_program PRIVATE InertialScale)
+target_link_libraries(estimate_scale PRIVATE InertialScale)
 
 
-target_link_libraries(my_program PRIVATE 
+target_link_libraries(estimate_scale PRIVATE 
    # ${MATLAB_RUNTIME_DIR}/runtime/glnxa64/libmcrrt.so
     ${MATLAB_RUNTIME_DIR}/runtime/glnxa64/libmwmclmcrrt.so  
 )
