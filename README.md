@@ -43,6 +43,6 @@ make
 
 To the run the program:
 ```
-./my_program dataset_name
+./estimate_scale dataset_name
 ```
 
