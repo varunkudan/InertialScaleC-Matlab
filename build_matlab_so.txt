@@ -1,0 +1,1 @@
+mcc -W lib:libInertialScale -T link:lib -d ./c_project -a ./code ScaleEstimationMain.m
