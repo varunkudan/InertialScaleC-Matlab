@@ -2,39 +2,8 @@
 #include "libInertialScale.h"  // MATLAB-generated header
 #include <filesystem>
 #include <string>
+#include <fstream>
 
-
-bool datasetInValid(const std::string& dataset)
-{
-    std::string path = "data/"+dataset;
-
-    if(!std::filesystem::is_directory(path))
-    {
-        std::cout<<"The dataset folder does not exits in data folder. Please check the name.\n"<<
-                    "The dataset folder should be placed in the path 'InertialScaleC-Matlab/data/' \n";
-        return true;
-    }
-
-    if(!std::filesystem::exists(path+"poses.txt"))
-    {
-        std::cout<<"The dataset folder does not contain poses.txt. Please add the poses.txt file\n";
-        return true;
-    }
-
-    if(!std::filesystem::exists(path+"accelerometer.txt"))
-    {
-        std::cout<<"The dataset folder does not contain accelerometer.txt. Please add the poses.txt file\n";
-        return true;
-    }
-
-    if(!std::filesystem::exists(path+"gyroscope.txt"))
-    {
-        std::cout<<"The dataset folder does not contain gyroscope.txt. Please add the poses.txt file\n";
-        return true;
-    }
-
-    return false;
-}
 
 int main(int argc, char** argv) {
     if(argc < 2)
@@ -43,10 +12,10 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    if(datasetInValid(argv[1]))
+    /*if(datasetInValid(argv[1]))
     {
         return 1;
-    }
+    }*/
 
     // Initialize MATLAB Runtime
     if (!libInertialScaleInitialize()) {
@@ -58,6 +27,7 @@ int main(int argc, char** argv) {
     std::string dataset = argv[1];
     mxArray* mxStr = mxCreateString(dataset.c_str());
     mxArray* output = NULL;
+
     
     if (!mlfScaleEstimationMain(1, &output, mxStr)) {
         std::cerr << "Error calling MATLAB function." << std::endl;
@@ -66,15 +36,38 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    if (output != NULL) 
-    {
-        // Process the output (if needed)
-        char* result = mxArrayToString(output);
-        std::cout << "MATLAB function returned: " << result << std::endl;
-        mxFree(result);  // Free the memory allocated by mxArrayToString
+    if (output == nullptr) {
+            std::cerr << "Error: MATLAB output is NULL!" << std::endl;
+    } else {
+        std::cout << "MATLAB function returned a valid mxArray." << std::endl;
     }
 
+    std::ofstream outfile("output.txt");
+    if (!outfile) {
+        std::cerr << "Error opening the file for writing!" << std::endl;
+        return -1;
+    }
 
+    double scale = 0;
+
+    if (output != NULL) 
+    {
+
+        // Process the output (if needed)
+        //char* result = mxArrayToString(output);
+         double* result = mxGetPr(output);
+
+        if (result == nullptr) {
+        std::cerr << "Error: mxArrayToString returned NULL!" << std::endl;
+        } else {
+            outfile << *result << std::endl;
+            std::cout << "MATLAB function returned: " << *result << std::endl;
+            scale = *result;
+            mxFree(result);  // Free the allocated memory
+        }
+    }
+
+    outfile.close();
 
     // Terminate the library
     libInertialScaleTerminate();
