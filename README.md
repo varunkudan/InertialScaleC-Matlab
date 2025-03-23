@@ -4,9 +4,9 @@ Dependencies:
 Matlab Runtime
 To Install Matlab runtime run the follwing commands:
 ```
-wget https://ssd.mathworks.com/supportfiles/downloads/R2024a/Release/7/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2024a_Update_7_glnxa64.zip
-unzip MATLAB_Runtime_R2024a_Update_7_glnxa64.zip
-cd MATLAB_Runtime_R2024a_Update_7_glnxa64
+wget https://ssd.mathworks.com/supportfiles/downloads/R2024b/Release/5/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2024b_Update_5_glnxa64.zip
+unzip MATLAB_Runtime_R2024b_Update_5_glnxa64.zip
+cd MATLAB_Runtime_R2024b_Update_5_glnxa64
 sudo ./install
 ```
 
